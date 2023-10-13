@@ -43,7 +43,7 @@ function TableData() {
   const handleEditData = async (rowData) => {
 
     // console.warn(category,productId)
-    // handleClose()
+
     var body = { "id": productId, "title": title, "price": price, "category": category, "description": description }
     console.log(productId, category)
 
@@ -65,7 +65,9 @@ function TableData() {
       })
     }
 
-    fetchAllProducts()
+    console.log('Updated Data:', { "id": productId, "title": title, "price": price, "category": category, "description": description })
+      fetchAllProducts()
+
   }
 
   const handleDeleteData = async (rowData) => {
@@ -93,7 +95,6 @@ function TableData() {
         Swal.fire('Changes are not saved', '', 'info')
       }
     })
-
 
   }
   const showProductDetails = () => {
@@ -176,26 +177,31 @@ function TableData() {
         title={<span>Product Details</span>}
         columns={[
           {
+            title: 'Product Id',
+            field: 'id'
+          },
+          {
             title: 'Product title',
-            field: 'title'
+            render: rowData => <div style={{ overflow: "hidden", textOverflow: "ellipsis", display: "-webkit-box", WebkitLineClamp: "2", WebkitBoxOrient: "vertical", fontFamily: "poppins", fontWeight: 600, fontSize: "1rem", cursor: "pointer" }}>{rowData.title}</div>
           },
           {
-            title: 'Category',
-            field: 'category'
+            title: 'Category & Price',
+            render: rowData => <div>{rowData.category}<br /> $ {rowData.price}</div>
           },
           {
-            title: 'Logo',
+            title: 'Description',
+            render: rowData => <div style={{ overflow: "hidden", textOverflow: "ellipsis", display: "-webkit-box", WebkitLineClamp: "2", WebkitBoxOrient: "vertical", fontFamily: "poppins", fontWeight: 600, fontSize: "1rem", cursor: "pointer" }}>{rowData.description}</div>
+          },
+          {
+            title: 'Rating',
+            render: rowData => <div> Rate: {rowData.rating.rate}<br /> Count: {rowData.rating.count}</div>
+          },
+          {
+            title: 'Image',
             render: rowData => <Avatar src={rowData.image} variant="rounded" style={{ width: 70, height: 70 }} />
           },
-          {
-            title: 'View Details',
-            render: rowData => <div><Button variant='outlined'   >View</Button></div>
-          },
           // { title: 'Status', field: 'status' },
-          // {
-          //   title: 'Last Updation',
-          //   render: rowData => <div>{rowData.createdat}<br />{rowData.updateat}<br />{rowData.createdby}</div>
-          // },
+
 
         ]}
 
