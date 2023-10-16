@@ -8,7 +8,7 @@ import { PhotoCamera } from '@mui/icons-material';
 import Swal from 'sweetalert2';
 
 
-function TableData() {
+function TableData() {  
   const [Products, setProducts] = useState([])
 
 
@@ -44,7 +44,7 @@ function TableData() {
 
     // console.warn(category,productId)
 
-    var body = { "id": productId, "title": title, "price": price, "category": category, "description": description }
+    var body = { "title": title, "price": price, "category": category, "description": description }
     console.log(productId, category)
 
     var result = await axios.put(`https://fakestoreapi.com/products/${productId}`, body)   /* {body:JSON.stringify({"title":title,"price":price,"category":category,"description":description})} */
@@ -169,6 +169,7 @@ function TableData() {
   useEffect(function () {
     fetchAllProducts()
   }, [])
+
   function showAllProducts() {
     return (
       <MaterialTable
